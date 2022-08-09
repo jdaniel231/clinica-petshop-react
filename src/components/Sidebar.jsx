@@ -23,7 +23,7 @@ const links = [
   {
     name: 'Clientes',
     icon: <AiOutlineUser />,
-    to: 'clients',
+    to: 'clients', 
     section: 'clients'
   }
 ];
