@@ -4,9 +4,14 @@ import './App.css';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 import { FiSettings } from 'react-icons/fi'
 import Sidebar from './components/Sidebar';
+import { useStateContext } from "./contexts/ContextProvider";
+import Navbar from './components/Navbar';
+
 
 const App = () => {
-  const activeMenu = true;
+
+  const { activeMenu } = useStateContext();
+
   return (
     <div>
       <BrowserRouter>
@@ -38,7 +43,7 @@ const App = () => {
                 : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
           } >
             <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full" >
-              Navbar
+              <Navbar />
             </div>
           </div>
           <div>
