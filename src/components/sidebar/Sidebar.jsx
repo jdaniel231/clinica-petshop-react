@@ -5,7 +5,7 @@ import { MdOutlineCancel, MdOutlineDashboard } from 'react-icons/md'
 import { BiClinic } from 'react-icons/bi'
 import { AiOutlineUser } from 'react-icons/ai'
 import { TooltipComponent } from '@syncfusion/ej2-react-popups'
-import { useStateContext } from "../contexts/ContextProvider";
+import { useStateContext } from "../../contexts/ContextProvider";
 
 
 const links = [
@@ -28,7 +28,13 @@ const links = [
   }
 ];
 const Sidebar = () => {
-  const { activeMenu, setActiveMenu } = useStateContext();
+  const { activeMenu, setActiveMenu, screenSize } = useStateContext();
+
+  const handleCloseSideBar = () => {
+    if (activeMenu !== undefined && screenSize <= 900) {
+      setActiveMenu(false);
+    }
+  };
 
   const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-white  bg-light-blue text-md m-2';
   const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-blue m-2';
@@ -39,7 +45,7 @@ const Sidebar = () => {
       {activeMenu && (
         <>
           <div className="flex justify-between items-center">
-            <Link to='/' onClick={() => setActiveMenu(false) } 
+            <Link to='/' onClick={handleCloseSideBar} 
               className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
 
             >
@@ -48,9 +54,9 @@ const Sidebar = () => {
             <TooltipComponent content='Menu' position='BottomCenter'>
               <button
                 type="button"
-                onClick={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)}
+                onClick={() => setActiveMenu(!activeMenu)}
                 // style={{ color: currentColor }}
-                className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block"
+                className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
               >
                 <MdOutlineCancel />
               </button>
@@ -62,7 +68,7 @@ const Sidebar = () => {
               <NavLink
                 to={`/${item.to}`}
                 key={item.to}
-                onClick={() =>{}}
+                onClick={handleCloseSideBar}
                 style={({ isActive }) => ({
                   backgroundColor: isActive ? activeLink : normalLink,
                 })}
@@ -70,14 +76,13 @@ const Sidebar = () => {
               >
                 {item.icon} 
                 <span className="capitalize"> {item.name} </span>
-
               </NavLink>
-            )) 
-            }
+            ))}
           </div>
-        </>)}
+        </>
+      )}
     </div>
-  )
+  );
 }
 
 export default Sidebar;
