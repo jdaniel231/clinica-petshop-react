@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 import { FiSettings } from 'react-icons/fi'
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
 import { useStateContext } from "./contexts/ContextProvider";
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar/Navbar';
 
 
 const App = () => {
@@ -49,7 +49,8 @@ const App = () => {
           <div>
             <Routes>
               <Route path="/" element="Ecommerce" />
-              <Route path="/dashboard" element="Dashboard" />
+              <Route path="/attendances" element="Atendimentos" />
+              <Route path="/clients" element="Clientes" />
             </Routes>
           </div>
         </div>
